@@ -1,0 +1,32 @@
+[
+    {
+      "description": "Date of the reported covid cases by state",
+      "mode": "NULLABLE",
+      "name": "date",
+      "type": "DATE"
+    },
+    {
+      "description": "USA's state reported",
+      "mode": "NULLABLE",
+      "name": "state",
+      "type": "STRING"
+    },
+    {
+      "description": "fip code to identify the states",
+      "mode": "NULLABLE",
+      "name": "fip",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Number of cases reported",
+      "mode": "NULLABLE",
+      "name": "cases",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Number of deaths reported",
+      "mode": "NULLABLE",
+      "name": "deaths",
+      "type": "INTEGER"
+    }
+]
