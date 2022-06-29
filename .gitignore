@@ -1,0 +1,6 @@
+#ignore terraform modules will be downloaded with the terraform init
+.terraform
+.terraform.lock.hcl
+#ignore terraform states
+terraform.tfstate
+terraform.tfstate.backup
