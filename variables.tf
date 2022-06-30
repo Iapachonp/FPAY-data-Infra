@@ -23,3 +23,8 @@ variable "delete_contents_on_destroy"{
   type = bool
   default = true
 }
+variable "function_name" {
+  description = "Name of the GCP function"
+  type        = string
+  default     = "function-dataops-tes"
+}
