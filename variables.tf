@@ -28,3 +28,18 @@ variable "function_name" {
   type        = string
   default     = "function-dataops-tes"
 }
+variable "cron_job_name" {
+  description = "Name of the cronjob for covid ingestion"
+  type        = string
+  default     = "cron-job-covid-ingerstion"
+}
+variable "topic_cron_job_name" {
+  description = "Name of the topic for covid ingestion"
+  type        = string
+  default     = "topic-cron-job-covid"
+}
+variable "csv_function_name" {
+  description = "Name of the function that will upload csv covid file to the bucket"
+  type        = string
+  default     = "csv_function_name"
+}

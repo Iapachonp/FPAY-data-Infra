@@ -4,3 +4,5 @@
 #ignore terraform states
 terraform.tfstate
 terraform.tfstate.backup
+#ignore local credentials 
+application_default_credentials.json
