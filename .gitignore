@@ -6,3 +6,5 @@ terraform.tfstate
 terraform.tfstate.backup
 #ignore local credentials 
 application_default_credentials.json
+#test scrip
+testy.py

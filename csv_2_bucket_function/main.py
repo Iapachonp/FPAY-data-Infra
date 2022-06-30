@@ -8,10 +8,7 @@ def download_csv():
     return (df.to_csv(index=False))
 
 def upload_csv(blob_name, file, bucket_name):
-    """ Upload data to a bucket"""
-     
-    # Explicitly use service account credentials by specifying the private key
-    # file.
+    # Implicitly use service account credentials with environment credentials
     storage_client = storage.Client()
     #print(buckets = list(storage_client.list_buckets())
     bucket = storage_client.get_bucket(bucket_name)

@@ -1,13 +1,3 @@
-# module "bucket" {
-#   source = "terraform-google-modules/cloud-storage/google"
-#   version = "3.2.0"
-#   names       = var.bucket_name
-#   project_id = var.project_id
-#   location   = "us-east1"
-#   prefix = ""
-# }
-
-## IN CASE OF MORE COMPLEX CONFIG USE MODULE RATHER THAN THE RAW RESOURCE
 
 resource "google_storage_bucket" "trigger_bucket" {
   name          = var.bucket_name[0]
@@ -16,15 +6,6 @@ resource "google_storage_bucket" "trigger_bucket" {
   project       = var.project_id
   storage_class = "REGIONAL"
 }
-
-# module "pubsub" {
-#   source  = "terraform-google-modules/pubsub/google"
-#   version = "~> 1.8"
-#   topic      = var.topic_name
-#   project_id = var.project_id
-#   }
-
-## IN CASE OF MORE COMPLEX CONFIG USE MODULE RATHER THAN THE RAW RESOURCE
 
 resource "google_pubsub_topic" "topic" {
   project      = var.project_id
@@ -81,6 +62,7 @@ module "localhost_function" {
   region           = "us-east1"
   source_directory = "${path.module}/function_source"
   runtime          = "python39"
+  service_account_email      = "ipachon-test@appspot.gserviceaccount.com"
 
   # source_dependent_files = [local_file.file]
   depends_on             = [google_storage_bucket.trigger_bucket]
@@ -95,7 +77,7 @@ resource "null_resource" "wait_for_function" {
 }
 
 ###################################################################################
-###################################################################################
+############## CSV2BUCKET INGESTION FUNCTION AND CRONJOB CONFIGURATION ############
 ###################################################################################
 
 resource "google_pubsub_topic" "topic2" {
@@ -132,7 +114,7 @@ resource "google_pubsub_subscription" "sub_topic2" {
 resource "google_cloud_scheduler_job" "job" {
   name        = var.cron_job_name
   description = "cron job for covid csv ingestion"
-  schedule    = "*/5 * * * *"
+  schedule    = "0 5 * * *" #Ingestion will be every day at 5am UTC
   project      = var.project_id
   region      = "us-east1"
 
