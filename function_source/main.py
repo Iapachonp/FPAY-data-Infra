@@ -1,5 +1,15 @@
 from google.cloud import bigquery
 import os
+from google.cloud import pubsub_v1
+
+def publish_2_topic(project_id, file_name):
+    topic_id= 'topic-dataops-test'
+    publisher = pubsub_v1.PublisherClient()
+    topic_path = publisher.topic_path(project_id, topic_id)
+    future = publisher.publish(topic_path, file_name.encode("utf-8"))
+    print(future.result())
+
+    
 
 def hello_gcs(event, context):
     """Background Cloud Function to be triggered by Cloud Storage.
@@ -44,4 +54,5 @@ def hello_gcs(event, context):
     load_job = client.load_table_from_uri(uri, table_id, job_config=job_config)  # Make an API request.
     load_job.result()  # Waits for the job to complete.
     destination_table = client.get_table(table_id)  # Make an API request.
-    print("Loaded {} rows.".format(destination_table.num_rows))
+    print("Total number {} rows.".format(destination_table.num_rows))
+    publish_2_topic(project, event['name'] )

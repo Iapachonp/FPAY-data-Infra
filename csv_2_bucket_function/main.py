@@ -23,7 +23,7 @@ def main_pub_sub(event, context):
     if 'data' in event:
         name = base64.b64decode(event['data']).decode('utf-8')
         print('getting data from {}'.format(name))
-        file_name="csv_covid_ingestion_{}".format(datetime.datetime.now())
+        file_name="us-states-{}".format(datetime.datetime.now().strftime("%Y%m%d"))
         upload_csv(file_name, download_csv(), "dataops-test-7e904d691bf2")
     else:
         print('No data in the message')
